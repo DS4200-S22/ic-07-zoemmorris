@@ -89,8 +89,8 @@ const mouseover1 = function(event, d) {
 
 // allows the tooltip to be seen no matter where on the bar the user is hovering over 
 const mousemove1 = function(event, d) {
-  tooltip1.style("left", (event.x)+"px") 
-          .style("top", (event.y + yTooltipOffset) +"px"); 
+  tooltip1.style("left", (event.pageX)+"px") 
+          .style("top", (event.pageY + yTooltipOffset) +"px"); 
 }
 
 // removes the tooltip when the user is no longer hovering over the visualization 
@@ -163,8 +163,8 @@ d3.csv("data/barchart.csv").then((data) => {
   }
 
   const mousemove2 = function(event, d) {
-    tooltip2.style("left", (event.x)+"px") 
-            .style("top", (event.y + yTooltipOffset) +"px"); 
+    tooltip2.style("left", (event.pageX)+"px") 
+            .style("top", (event.pageY + yTooltipOffset) +"px"); 
   }
 
   const mouseleave2 = function(event, d) { 

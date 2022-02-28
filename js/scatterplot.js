@@ -38,6 +38,26 @@ d3.csv("data/scatter.csv").then((data) => {
             .tickFormat(i => data[i].day))  
       .attr("font-size", '20px');
 
+  const tooltip = d3.select("#csv-scatter") 
+                .append("div") 
+                .attr('id', "tooltip") 
+                .style("opacity", 0) 
+                .attr("class", "tooltip"); 
+
+  const mouseover = function(event, d) {
+    tooltip.html("Day: " + d.day + "<br> Score: " + d.score + "<br>") 
+            .style("opacity", 1);  
+  }
+
+  const mousemove = function(event, d) {
+    tooltip.style("left", (event.pageX)+"px") 
+            .style("top", (event.pageY + yTooltipOffset) +"px"); 
+  }
+
+    const mouseleave = function(event, d) { 
+    tooltip.style("opacity", 0); 
+  }
+
 
   svg3.selectAll(".bar")
   .data(data)
@@ -46,7 +66,10 @@ d3.csv("data/scatter.csv").then((data) => {
     .attr("cx", (d, i) => xScale(i) + margin.left)
     .attr("cy", (d) => yScale(d.score))
     .attr("r", 10)
-    .attr("class", "bar");
+    .attr("class", "bar")
+    .on("mouseover", mouseover) 
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave);
 });
 
 
